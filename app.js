@@ -20,6 +20,12 @@ app.get('/playstore', (req, res) => {
         }
     });
 
+    if (genre === 'select') {
+      return res
+      .status(400)
+      .send('You cannot sort without picking a genre');
+    }
+
     if (sort === "app") {
         foundGames
           .sort((a, b) => {
@@ -36,6 +42,8 @@ app.get('/playstore', (req, res) => {
 
     res.json(foundGames);
 })
+
+module.exports = app;
 
 app.listen(8000, () => {
     console.log('Server started on PORT 8000');
